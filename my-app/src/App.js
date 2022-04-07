@@ -6,48 +6,54 @@ import React, { useState, useEffect } from 'react';
 
 import LoadingScreen from './components/LoadingScreen';
 
-
 function App() {
 
-    const [loading, setLoading] = useState(true);
-    const [persInfo, setPersInfo] = useState([]);
+    const [isLoading, setLoading] = useState(true);
+    const [personalInfo, setPersInfo] = useState([]);
+
+    async function getResponse() {
+        try {
+            let response = await axios.get('https://jsonplaceholder.typicode.com/users');
+            setPersInfo(response.data);
+            setTimeout(() => { setLoading(false); }, 3000);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
-        axios.get('https://jsonplaceholder.typicode.com/users')
-            .then(response => {
-                setPersInfo(response.data);
-                setTimeout(()=>{setLoading(false);},3000);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+
+        getResponse();
+
     }, []);
 
 
     return (
 
         <>
-            {loading === true ? (
-                <LoadingScreen />
-            ) : (
-                <ul>
-                    {
-                        persInfo.map(persInfo =>
-                            <div className='card' key={persInfo.id}>
-                                <img className='resize' src={'https://avatars.dicebear.com/v2/avataaars/' + persInfo.username + '.svg?options[mood][]=happy'}></img>
-                                <div className='info'>
-                                    <h2 >{persInfo.name}</h2>
-                                    <p><strong>Email:</strong> {persInfo.email}</p>
-                                    <p><strong>Phone:</strong> {persInfo.phone}</p>
-                                    <p><strong>Company:</strong> {persInfo.company.name}</p>
-                                    <p><strong>Website:</strong> {persInfo.website}</p>
-                                    <p><strong>Address:</strong> {persInfo.address.street}, {persInfo.address.suite}, {persInfo.address.city}, {persInfo.address.zipcode}</p>
-                                </div>
-                            </div>)
-                    }
-                </ul>
+            {isLoading === true
+                ? (
+                    <LoadingScreen />
+                ) : (
+                    <ul>
+                        {
+                            personalInfo.map(personalInfo =>
+                                <div className='card' key={personalInfo.id}>
+                                    <img className='resize' src={'https://avatars.dicebear.com/v2/avataaars/' + personalInfo.username + '.svg?options[mood][]=happy'}></img>
+                                    <div className='info'>
+                                        <h2 >{personalInfo.name}</h2>
+                                        <p><strong>Email:</strong> {personalInfo.email}</p>
+                                        <p><strong>Phone:</strong> {personalInfo.phone}</p>
+                                        <p><strong>Company:</strong> {personalInfo.company.name}</p>
+                                        <p><strong>Website:</strong> {personalInfo.website}</p>
+                                        <p><strong>Address:</strong> {personalInfo.address.street}, {personalInfo.address.suite}, {personalInfo.address.city}, {personalInfo.address.zipcode}</p>
+                                    </div>
+                                </div>)
+                        }
+                    </ul>
 
-            )}
+                )}
         </>
     );
 }
