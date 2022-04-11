@@ -1,33 +1,22 @@
 import './App.css';
 import './styles.css';
 
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
 import LoadingScreen from './components/LoadingScreen';
+import { getResponse } from './fetchData.js';
 
 function App() {
 
     const [isLoading, setLoading] = useState(true);
     const [personalInfo, setPersInfo] = useState([]);
 
-    async function getResponse() {
-        try {
-            let response = await axios.get('https://jsonplaceholder.typicode.com/users');
-            setPersInfo(response.data);
-            setTimeout(() => { setLoading(false); }, 3000);
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
+    setTimeout(() => { setLoading(false); }, 3000);
 
-    useEffect(() => {
-
-        getResponse();
-
+    useEffect(async () => {
+        const response = await getResponse();
+        setPersInfo(response);
     }, []);
-
 
     return (
 
@@ -36,23 +25,18 @@ function App() {
                 ? (
                     <LoadingScreen />
                 ) : (
-                    <ul>
-                        {
-                            personalInfo.map(personalInfo =>
-                                <div className='card' key={personalInfo.id}>
-                                    <img className='resize' src={'https://avatars.dicebear.com/v2/avataaars/' + personalInfo.username + '.svg?options[mood][]=happy'}></img>
-                                    <div className='info'>
-                                        <h2 >{personalInfo.name}</h2>
-                                        <p><strong>Email:</strong> {personalInfo.email}</p>
-                                        <p><strong>Phone:</strong> {personalInfo.phone}</p>
-                                        <p><strong>Company:</strong> {personalInfo.company.name}</p>
-                                        <p><strong>Website:</strong> {personalInfo.website}</p>
-                                        <p><strong>Address:</strong> {personalInfo.address.street}, {personalInfo.address.suite}, {personalInfo.address.city}, {personalInfo.address.zipcode}</p>
-                                    </div>
-                                </div>)
-                        }
-                    </ul>
-
+                    personalInfo.map(row =>
+                        <div className='card' key={row.id}>
+                            <img className='resize' src={'https://avatars.dicebear.com/v2/avataaars/' + row.username + '.svg?options[mood][]=happy'}></img>
+                            <div className='info'>
+                                <h2 >{row.name}</h2>
+                                <p><strong>Email:</strong> {row.email}</p>
+                                <p><strong>Phone:</strong> {row.phone}</p>
+                                <p><strong>Company:</strong> {row.company.name}</p>
+                                <p><strong>Website:</strong> {row.website}</p>
+                                <p><strong>Address:</strong> {row.address.street}, {row.address.suite}, {row.address.city}, {row.address.zipcode}</p>
+                            </div>
+                        </div>)
                 )}
         </>
     );
