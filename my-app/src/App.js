@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 
 import LoadingScreen from './components/LoadingScreen';
 import { getResponse } from './fetchData.js';
-import { userInfo } from './components/userInfo.js';
+import { userInfo } from './userInfo.js';
 
 function App() {
 
