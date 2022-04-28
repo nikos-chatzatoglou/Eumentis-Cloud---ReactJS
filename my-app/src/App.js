@@ -4,19 +4,19 @@ import './styles.css';
 import React, { useState, useEffect } from 'react';
 
 import LoadingScreen from './components/LoadingScreen';
-import { getResponse } from './fetchData.js';
-import { userInfo } from './userInfo.js';
+import { fetchUsers } from './actions/fetchUsers.js';
+import { userInfo } from './components/userInfo.js';
 
 function App() {
 
     const [isLoading, setLoading] = useState(true);
     const [personalInfo, setPersInfo] = useState([]);
 
-    setTimeout(() => { setLoading(false); }, 3000);
-
     useEffect(async () => {
-        const response = await getResponse();
+        const link = 'https://jsonplaceholder.typicode.com/users';
+        const response = await fetchUsers(link);
         setPersInfo(response);
+        setLoading(false);
     }, []);
 
     return (
@@ -26,8 +26,7 @@ function App() {
                 ? (
                     <LoadingScreen />
                 ) : (
-                    personalInfo.map(row => userInfo(row)
-                    )
+                    personalInfo.map(row => userInfo(row))
                 )}
         </>
     );
