@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export async function getResponse() {
+export async function fetchUsers(link) {
     let response;
     try {
-        response = await axios.get('https://jsonplaceholder.typicode.com/users');
+        response = await axios.get(link);
     }
     catch (error) {
         console.log(error);
