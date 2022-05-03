@@ -1,9 +1,9 @@
 
 import React from 'react';
-export function userInfo(props) {
+export function UserInfo(props) {
     return (
         <div className='card' key={props.id}>
-            <img className='resize' src={'https://avatars.dicebear.com/v2/avataaars/' + props.username + '.svg?options[mood][]=happy'}></img>
+            <img className='resize' src={`https://avatars.dicebear.com/v2/avataaars/${props.username}.svg?options[mood][]=happy`}></img>
             <div className='info'>
                 <h2 >{props.name}</h2>
                 <p><strong>Email:</strong> {props.email}</p>
