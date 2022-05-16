@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import '../styles.css';
 import LoadingScreen from './LoadingScreen';
-import { fetchUsers } from '../actions/fetchUsers.js';
+import { getUser } from '../services/getUser.js';
 import { UserInfo } from './UserInfo.js';
+
+import { Row } from 'antd';
+import 'antd/dist/antd.css';
+
+
 
 const LoadMainPage = () => {
     const [isLoading, setLoading] = useState(true);
     const [personalInfo, setPersInfo] = useState([]);
-
+    const link = 'https://jsonplaceholder.typicode.com/users';
     useEffect(async () => {
-        const link = 'https://jsonplaceholder.typicode.com/users';
-        const response = await fetchUsers(link);
+        const response = await getUser(link);
         setPersInfo(response);
         setLoading(false);
     }, []);
@@ -21,10 +24,18 @@ const LoadMainPage = () => {
                 ? (
                     <LoadingScreen />
                 ) : (
-                    personalInfo.map(row => UserInfo(row))
+
+                    <Row>
+                        {personalInfo.map(row => UserInfo(row))}
+                    </Row>
+
+
+
+
                 )}
         </>
     );
 };
 
 export default LoadMainPage;
+

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function fetchUsers(link) {
+export async function fetchData(link) {
     let response;
     try {
         response = await axios.get(link);
