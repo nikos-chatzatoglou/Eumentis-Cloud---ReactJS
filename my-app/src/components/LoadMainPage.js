@@ -12,10 +12,13 @@ const LoadMainPage = () => {
     const [isLoading, setLoading] = useState(true);
     const [personalInfo, setPersInfo] = useState([]);
     const link = 'https://jsonplaceholder.typicode.com/users';
-    useEffect(async () => {
-        const response = await getUser(link);
-        setPersInfo(response);
-        setLoading(false);
+    useEffect(() => {
+        const setValues = async () => {
+            const response = await getUser(link);
+            setPersInfo(response);
+            setLoading(false);
+        };
+        setValues();
     }, []);
 
     return (
@@ -26,7 +29,7 @@ const LoadMainPage = () => {
                 ) : (
 
                     <Row>
-                        {personalInfo.map(row => UserInfo(row))}
+                        {personalInfo.map(row => <UserInfo {...row}> </UserInfo>)}
                     </Row>
 
 
