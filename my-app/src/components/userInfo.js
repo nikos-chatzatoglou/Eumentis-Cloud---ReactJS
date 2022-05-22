@@ -1,18 +1,14 @@
 
 import React from 'react';
 import { useState } from 'react';
-
 import { Card, Button, Modal, Form, Input } from 'antd';
-import { HeartTwoTone, EditOutlined, DeleteFilled, MailOutlined, PhoneOutlined, GlobalOutlined } from '@ant-design/icons';
-import { getTwoToneColor, setTwoToneColor } from '@ant-design/icons';
-
+import { HeartFilled, HeartOutlined, EditOutlined, DeleteFilled, MailOutlined, PhoneOutlined, GlobalOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
 export function UserInfo(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
-
-
+  const [toggleLove, setStatus] = useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -70,7 +66,6 @@ export function UserInfo(props) {
         </Form>
       </Modal>
 
-
       <Card
         style={{ margin: 15 }}
         cover={
@@ -82,8 +77,9 @@ export function UserInfo(props) {
             />
           </div>
         }
+
         actions={[
-          <Button style={{ background: 'none', border: 'none' }} icon={<HeartTwoTone />} />,
+          <Button style={{ background: 'none', border: 'none' }} onClick={() => setStatus(!toggleLove)}>{toggleLove ? <HeartFilled style={{ color: '#FF0000' }} /> : <HeartOutlined style={{ color: '#FF0000' }} />}` </Button>,
           <Button style={{ background: 'none', border: 'none' }} icon={<EditOutlined />} onClick={showModal} />,
           <Button style={{ background: 'none', border: 'none' }} icon={<DeleteFilled />} />
         ]}
@@ -103,9 +99,8 @@ export function UserInfo(props) {
         </div>
       </Card>
 
-
-
     </>
 
   );
 };
+
