@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import LoadingScreen from './LoadingScreen';
 import { getUser } from '../services/getUser.js';
 import { UserInfo } from './UserInfo.js';
-
 import { Row } from 'antd';
 import 'antd/dist/antd.css';
 
@@ -10,15 +9,21 @@ import 'antd/dist/antd.css';
 
 const LoadMainPage = () => {
     const [isLoading, setLoading] = useState(true);
-    const [personalInfo, setPersInfo] = useState([]);
+    const [personalInfo, setPersonalInfo] = useState([]);
     const link = 'https://jsonplaceholder.typicode.com/users';
+    const handleDelete = (id) => {
+        const newList = personalInfo.filter((item) => item.id !== id);
+        setPersonalInfo(newList);
+    };
     useEffect(() => {
         const setValues = async () => {
             const response = await getUser(link);
-            setPersInfo(response);
+            setPersonalInfo(response);
             setLoading(false);
+            console.log(response);
         };
         setValues();
+
     }, []);
 
     return (
@@ -29,7 +34,7 @@ const LoadMainPage = () => {
                 ) : (
 
                     <Row>
-                        {personalInfo.map(row => <UserInfo {...row}> </UserInfo>)}
+                        {personalInfo.map(row => <UserInfo handleDelete={handleDelete} {...row}> </UserInfo>)}
                     </Row>
 
 
