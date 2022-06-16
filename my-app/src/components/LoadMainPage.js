@@ -15,6 +15,11 @@ const LoadMainPage = () => {
         const newList = personalInfo.filter((item) => item.id !== id);
         setPersonalInfo(newList);
     };
+    const updateUser = (id, values) => {
+        console.log("hi from Parent");
+
+
+    };
     useEffect(() => {
         const setValues = async () => {
             const response = await getUser(link);
@@ -34,7 +39,7 @@ const LoadMainPage = () => {
                 ) : (
 
                     <Row>
-                        {personalInfo.map(row => <UserInfo handleDelete={handleDelete} {...row}> </UserInfo>)}
+                        {personalInfo.map(row => <UserInfo updateUser={updateUser} handleDelete={handleDelete} {...row}> </UserInfo>)}
                     </Row>
 
 
