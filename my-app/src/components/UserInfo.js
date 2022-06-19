@@ -28,12 +28,10 @@ export function UserInfo(props) {
       .catch((info) => {
         console.log("Validate Failed:", info);
       });
-    console.log("from OK");
     setIsModalVisible(false);
   };
 
   const handleCancel = () => {
-    console.log("from Cancel");
     setIsModalVisible(false);
   };
 
@@ -67,7 +65,7 @@ export function UserInfo(props) {
       </Modal>
 
       <Card
-        style={{ margin: 15 }}
+        style={{ margin: 15, left: 50 }}
         cover={
           <AvatarImg
             alt="Avatar"
