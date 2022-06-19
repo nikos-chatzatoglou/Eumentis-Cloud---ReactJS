@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
-import { Card, Button, Modal, Form, Input } from 'antd';
+import { Card, Modal, Form, Input } from 'antd';
 import { HeartFilled, HeartOutlined, EditOutlined, DeleteFilled, MailOutlined, PhoneOutlined, GlobalOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
@@ -13,22 +13,6 @@ export function UserInfo(props) {
   const [form] = Form.useForm();
   const [toggleLove, setStatus] = useState(false);
 
-  const Paragraph = styled.p`
-  margin-left: 10px;
-`;
-  const StyledDiv = styled.div`
-  display: flex; 
-  flex-direction: row; 
-  `;
-  const StyledButton = styled.button`
-   background: none;
-   border: none;
-  
-  `;
-  const StyledAvatarImg = styled.img`
-  width: 400px;
-  height: 200px;
-  `;
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -38,7 +22,7 @@ export function UserInfo(props) {
       .validateFields()
       .then((values) => {
         form.setFieldsValue();
-        onCreate(values);
+        props.updateUser(id, values);
 
       })
       .catch((info) => {
@@ -53,74 +37,87 @@ export function UserInfo(props) {
     setIsModalVisible(false);
   };
 
-  const onCreate = (values) => {
-    console.log("Received values of form: ", values);
-
-    setIsModalVisible(false);
-  };
-
   return (
     <>
 
       <Modal title="Basic Modal" visible={isModalVisible} onCancel={handleCancel} onOk={onOK}>
         <Form form={form}>
-          <Form.Item initialValue={props.name} label="Name" name="Name"
+          <Form.Item initialValue={props.name} label="Name" name="name"
             rules={[{ required: true, message: 'This field is required!' }]}
           >
             <Input ></Input>
           </Form.Item>
-          <Form.Item initialValue={props.email} label="Email" name="Email"
+          <Form.Item initialValue={props.email} label="Email" name="email"
             rules={[{ required: true, message: 'This field is required!' }]}
           >
             <Input ></Input>
           </Form.Item>
-          <Form.Item initialValue={props.phone} label="Phone" name="Phone"
+          <Form.Item initialValue={props.phone} label="Phone" name="phone"
             rules={[{ required: false }]}
           >
             <Input ></Input>
           </Form.Item>
-          <Form.Item initialValue={props.website} label="Website" name="Website"
+          <Form.Item initialValue={props.website} label="Website" name="website"
             rules={[{ required: true, message: 'This field is required!' }]}
           >
             <Input ></Input>
           </Form.Item>
+          <Form.Item initialValue={props.username} name="username"></Form.Item>
         </Form>
       </Modal>
 
       <Card
         style={{ margin: 15 }}
         cover={
-          <StyledAvatarImg
+          <AvatarImg
             alt="Avatar"
             src={`https://avatars.dicebear.com/v2/avataaars/${props.username}.svg?options[mood][]=happy`}
           />
         }
 
         actions={[
-          <StyledButton onClick={() => setStatus(!toggleLove)}>{toggleLove ? <HeartFilled style={{ color: '#FF0000' }} /> : <HeartOutlined style={{ color: '#FF0000' }} />} </StyledButton>,
-          <StyledButton onClick={showModal}><EditOutlined /> </StyledButton>,
-          <StyledButton onClick={() => { props.handleDelete(id); }} > <DeleteFilled /> </StyledButton>
+          <CardButton onClick={() => setStatus(!toggleLove)}>{toggleLove ? <HeartFilled style={{ color: '#FF0000' }} /> : <HeartOutlined style={{ color: '#FF0000' }} />} </CardButton>,
+          <CardButton onClick={showModal}><EditOutlined /> </CardButton>,
+          <CardButton onClick={() => { props.handleDelete(id); }} > <DeleteFilled /> </CardButton>
 
         ]}
       >
         <h3>{props.name}</h3>
-        <StyledDiv >
+        <UserInfoWrapper >
           <MailOutlined />
-          <Paragraph>{props.email}</Paragraph>
-        </StyledDiv>
-        <StyledDiv >
+          <UserDetailInfo>{props.email}</UserDetailInfo>
+        </UserInfoWrapper>
+        <UserInfoWrapper >
           <PhoneOutlined />
-          <Paragraph>{props.phone}</Paragraph>
-        </StyledDiv>
-        <StyledDiv >
+          <UserDetailInfo>{props.phone}</UserDetailInfo>
+        </UserInfoWrapper>
+        <UserInfoWrapper >
           <GlobalOutlined />
-          <Paragraph>{props.website}</Paragraph>
-        </StyledDiv>
+          <UserDetailInfo>{props.website}</UserDetailInfo>
+        </UserInfoWrapper>
 
       </Card>
 
     </>
 
   );
+
 };
 
+
+const UserDetailInfo = styled.p`
+  margin-left: 10px;
+`;
+const UserInfoWrapper = styled.div`
+  display: flex; 
+  flex-direction: row; 
+  `;
+const CardButton = styled.button`
+   background: none;
+   border: none;
+  
+  `;
+const AvatarImg = styled.img`
+  width: 400px;
+  height: 200px;
+  `;

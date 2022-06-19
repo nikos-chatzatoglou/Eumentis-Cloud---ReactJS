@@ -15,8 +15,14 @@ const LoadMainPage = () => {
         const newList = personalInfo.filter((item) => item.id !== id);
         setPersonalInfo(newList);
     };
+
     const updateUser = (id, values) => {
-        console.log("hi from Parent");
+        const index = personalInfo.findIndex(element => element.id === id, values);
+        personalInfo[index] = values;
+        const personalInfoAfterEdit = [...personalInfo];
+        setPersonalInfo(personalInfoAfterEdit);
+
+
 
 
     };
