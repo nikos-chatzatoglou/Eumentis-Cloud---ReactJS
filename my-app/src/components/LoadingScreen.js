@@ -1,6 +1,6 @@
 import './LoadingScreen.css';
 import React, { Component } from 'react';
-
+//test
 const LoadingScreen = () => {
 
   let divs = [];
