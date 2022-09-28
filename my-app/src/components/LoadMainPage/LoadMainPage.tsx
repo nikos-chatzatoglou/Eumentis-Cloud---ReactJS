@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import LoadingScreen from './LoadingScreen';
-import { getUser } from '../services/getUser.js';
-import { UserInfo } from './UserInfo.js';
+
 import { Row } from 'antd';
 import 'antd/dist/antd.css';
-
-
+import { getUser } from '../../services/getUser';
+import LoadingScreen from '../LoadingScreen';
+import UserInfo from '../UserInfo/UserInfo';
 
 const LoadMainPage = () => {
+
     const [isLoading, setLoading] = useState(true);
-    const [personalInfo, setPersonalInfo] = useState([]);
+    const [personalInfo, setPersonalInfo] = useState<any>([]);
     const link = 'https://jsonplaceholder.typicode.com/users';
     const handleDelete = (id) => {
         const newList = personalInfo.filter((item) => item.id !== id);
@@ -41,11 +41,11 @@ const LoadMainPage = () => {
         <>
             {isLoading === true
                 ? (
-                    <LoadingScreen />
+                    <div>Hello Loader</div>
                 ) : (
 
                     <Row>
-                        {personalInfo.map(row => <UserInfo updateUser={updateUser} handleDelete={handleDelete} {...row}> </UserInfo>)}
+                        {personalInfo.map(row => <UserInfo  updateUser={updateUser} handleDelete={handleDelete} {...row} />)}
                     </Row>
 
 
