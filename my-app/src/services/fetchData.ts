@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function fetchData(link) {
+export async function fetchData(link:any) {
     let response;
     try {
         response = await axios.get(link);
@@ -9,6 +9,6 @@ export async function fetchData(link) {
         console.log(error);
     }
 
-    return response.data;
+    return response?.data;
 
 }
