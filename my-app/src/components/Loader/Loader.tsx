@@ -1,7 +1,7 @@
-import './LoadingScreen.css';
-import React, { Component } from 'react';
+import './Loader.styles.css';
+import React from 'react';
 
-const LoadingScreen = () => {
+const Loader = () => {
 
   let divs:any = [];
   for (let index = 1; index <= 9; index++) {
@@ -16,4 +16,4 @@ const LoadingScreen = () => {
   );
 };
 
-export default LoadingScreen;
+export default Loader;

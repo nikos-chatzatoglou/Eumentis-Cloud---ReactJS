@@ -4,6 +4,7 @@ import { Row } from 'antd';
 import 'antd/dist/antd.css';
 import { getUser } from '../../services/getUser';
 import UserInfo from '../UserInfo/UserInfo';
+import Loader from '../Loader/Loader';
 
 const LoadMainPage = () => {
 
@@ -36,7 +37,7 @@ const LoadMainPage = () => {
         <>
             {isLoading === true
                 ? (
-                    <div>Hello Loader</div>
+                    <Loader />
                 ) : (
 
                     <Row>
