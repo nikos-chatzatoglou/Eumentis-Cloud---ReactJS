@@ -6,33 +6,95 @@ import { getUser } from '../../services/getUser';
 import UserInfo from '../UserInfo/UserInfo';
 import Loader from '../Loader/Loader';
 
+type allUsersType = {
+    id: number;
+    name: string;
+    username: string;
+    email: string;
+    phone: string;
+    website: string;
+    address: {
+        street: string;
+        suite: string;
+        city: string;
+        zipcode: string;
+        geo: {
+            lat: string;
+            lng: string;
+        }
+    }
+    company: {
+        name: string;
+        catchPhrase: string;
+        bs: string;
+    }
+}[]
+type userType = {
+    id: number;
+    name: string;
+    username: string;
+    email: string;
+    phone: string;
+    website: string;
+    address: {
+        street: string;
+        suite: string;
+        city: string;
+        zipcode: string;
+        geo: {
+            lat: string;
+            lng: string;
+        }
+    }
+    company: {
+        name: string;
+        catchPhrase: string;
+        bs: string;
+    }
+}
+
+
+
 const LoadMainPage = () => {
 
     const [isLoading, setLoading] = useState(true);
-    const [personalInfo, setPersonalInfo] = useState<any>([]);
+    const [users, setUsers] = useState<allUsersType>([]);
     const link = 'https://jsonplaceholder.typicode.com/users';
-    const handleDelete = (id:any) => {
-        const newList = personalInfo.filter((item:any) => item.id !== id);
-        setPersonalInfo(newList);
+    
+    const handleDelete = (id:number) => {
+        const newList = users.filter((item:userType) => item.id !== id);
+        setUsers(newList);
     };
 
-    const updateUser = (id:any, values:any) => {
-        const index = personalInfo.findIndex((element: { id: any; }) => element.id === id, values);
-        personalInfo[index] = values;
-        const personalInfoAfterEdit = [...personalInfo];
-        setPersonalInfo(personalInfoAfterEdit);
+    const updateUser = (id:number, values:userType) => {
+        const index = users.findIndex((element: { id: number; }) => element.id === id, values);
+        users[index] = values;
+        console.log(values);
+        
+        const usersAfterEdit = [...users];
+        setUsers(usersAfterEdit);
+        //save user to local storage
+        localStorage.setItem('users', JSON.stringify(usersAfterEdit));
     };
     useEffect(() => {
         const setValues = async () => {
             const response = await getUser(link);
-            setPersonalInfo(response);
+            setUsers(response);
             setLoading(false);
             console.log(response);
         };
-        setValues();
+        if (localStorage.getItem('users') === null) {
+            setValues();
+        } else {
+            const usersFromLocalStorage = JSON.parse(localStorage.getItem('users') || '{}');
+            setUsers(usersFromLocalStorage);
+            setLoading(false);
+        }
+        
 
     }, []);
-
+    console.log("Users here",users);
+    
     return (
         <>
             {isLoading === true
@@ -41,7 +103,7 @@ const LoadMainPage = () => {
                 ) : (
 
                     <Row>
-                        {personalInfo.map((row : any) => <UserInfo  updateUser={updateUser} handleDelete={handleDelete} {...row} />)}
+                        {users.map((row : any) => <UserInfo  updateUser={updateUser} handleDelete={handleDelete} {...row} />)}
                     </Row>
                 )}
         </>

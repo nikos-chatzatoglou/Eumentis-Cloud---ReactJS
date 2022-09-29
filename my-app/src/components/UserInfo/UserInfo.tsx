@@ -15,24 +15,6 @@ type UserInfoProps = {
     email: string;
     phone: string;
     website: string;
-    address: {
-
-        street: string;
-        suite: string;
-        city: string;
-        zipcode: string;
-        geo: {
-
-            lat: string;
-            lng: string;
-        }
-    }
-    company: {
-
-        name: string;
-        catchPhrase: string;
-        bs: string; 
-    }
 }
 
 const UserInfo =({
@@ -44,23 +26,10 @@ const UserInfo =({
         email,
         phone,
         website,
-        address: {
-            street,
-            suite,
-            city,
-            zipcode,
-            geo: {
-                lat,
-                lng
-            }
-        },
-        company: {
-            name: companyName,
-            catchPhrase,
-            bs
-        }
     }: UserInfoProps
 ) => {
+  
+  
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
   const [toggleLove, setStatus] = useState(false);
@@ -86,7 +55,7 @@ const UserInfo =({
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
+  
   return (
     <>
 
@@ -95,22 +64,22 @@ const UserInfo =({
           <Form.Item initialValue={name} label="Name" name="name"
             rules={[{ required: true, message: 'This field is required!' }]}
           >
-            <Input ></Input>
+            <Input />
           </Form.Item>
           <Form.Item initialValue={email} label="Email" name="email"
             rules={[{ required: true, message: 'This field is required!' }]}
           >
-            <Input ></Input>
+            <Input />
           </Form.Item>
           <Form.Item initialValue={phone} label="Phone" name="phone"
             rules={[{ required: false }]}
           >
-            <Input ></Input>
+            <Input />
           </Form.Item>
           <Form.Item initialValue={website} label="Website" name="website"
             rules={[{ required: true, message: 'This field is required!' }]}
           >
-            <Input ></Input>
+            <Input />
           </Form.Item>
           <Form.Item initialValue={username} name="username"></Form.Item>
         </Form>
@@ -126,8 +95,13 @@ const UserInfo =({
         }
 
         actions={[
-          <CardButton onClick={() => setStatus(!toggleLove)}>{toggleLove ? <HeartFilled style={{ color: '#FF0000' }} /> : <HeartOutlined style={{ color: '#FF0000' }} />} </CardButton>,
-          <CardButton onClick={showModal}><EditOutlined /> </CardButton>,
+          <CardButton onClick={() => setStatus(!toggleLove)}>
+            {toggleLove ?
+            ( <HeartFilled style={{ color: '#FF0000' }} />)
+           :( <HeartOutlined style={{ color: '#FF0000' }} />)
+           }
+          </CardButton>,
+          <CardButton onClick={showModal}> <EditOutlined /> </CardButton>,
           <CardButton onClick={() => {handleDelete(id); }} > <DeleteFilled /> </CardButton>
 
         ]}
