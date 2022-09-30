@@ -7,6 +7,7 @@ import UserInfo from '../UserInfo/UserInfo';
 import Loader from '../Loader/Loader';
 
 type allUsersType = {
+    favorite: boolean;
     id: number;
     name: string;
     username: string;
@@ -30,6 +31,7 @@ type allUsersType = {
     }
 }[]
 type userType = {
+    favorite: boolean;
     id: number;
     name: string;
     username: string;
@@ -56,7 +58,6 @@ type userType = {
 
 
 const LoadMainPage = () => {
-
     const [isLoading, setLoading] = useState(true);
     const [users, setUsers] = useState<allUsersType>([]);
     const link = 'https://jsonplaceholder.typicode.com/users';
@@ -64,26 +65,36 @@ const LoadMainPage = () => {
     const handleDelete = (id:number) => {
         const newList = users.filter((item:userType) => item.id !== id);
         setUsers(newList);
-    };
+     localStorage.setItem('users', JSON.stringify(newList));
 
+    };
+    const handleFavorite = (id:number,value:boolean) => {
+        const index = users.findIndex((element: { id: number; }) => element.id === id)
+        console.log('value from parent',value);
+        users[index].favorite = value;
+        setUsers(users);
+        localStorage.setItem('users', JSON.stringify(users));
+    };
     const updateUser = (id:number, values:userType) => {
         const index = users.findIndex((element: { id: number; }) => element.id === id, values);
         users[index] = values;
-        console.log(values);
-        
         const usersAfterEdit = [...users];
         setUsers(usersAfterEdit);
         //save user to local storage
         localStorage.setItem('users', JSON.stringify(usersAfterEdit));
     };
+
     useEffect(() => {
         const setValues = async () => {
             const response = await getUser(link);
-            setUsers(response);
+            const usersWithFavorite = response.map((item: { favorite: boolean; }) => {
+                item.favorite = false;
+                return item;
+            });
+            setUsers(usersWithFavorite);
             setLoading(false);
-            console.log(response);
         };
-        if (localStorage.getItem('users') === null) {
+        if (localStorage.getItem('users') === null||localStorage.getItem('users') === '[]') {
             setValues();
         } else {
             const usersFromLocalStorage = JSON.parse(localStorage.getItem('users') || '{}');
@@ -93,7 +104,7 @@ const LoadMainPage = () => {
         
 
     }, []);
-    console.log("Users here",users);
+ 
     
     return (
         <>
@@ -103,8 +114,9 @@ const LoadMainPage = () => {
                 ) : (
 
                     <Row>
-                        {users.map((row : any) => <UserInfo  updateUser={updateUser} handleDelete={handleDelete} {...row} />)}
+                     {users.map((row : userType) => <UserInfo handleFavorite={ handleFavorite } updateUser={ updateUser } handleDelete={ handleDelete } user= {row}  />)} 
                     </Row>
+                    
                 )}
         </>
     );
