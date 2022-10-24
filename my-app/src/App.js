@@ -1,9 +1,17 @@
 import React from "react";
-//import load main page component
-import LoadMainPage from "./components/LoadMainPage/LoadMainPage";
-const App=()=> {
+import { Routes, Route } from "react-router-dom";
 
-    return ( <LoadMainPage /> );
-}
+import LoadMainPage from "./pages/LoadMainPage/LoadMainPage";
+import KitchenSink from "./pages/KitchenSink/KitchenSink";
 
+const App = () => {
+	return (
+		<Routes>
+			<Route path='/' element={<LoadMainPage />} />
+			<Route path='/kitchenSink' element={<KitchenSink />} />
+
+			<Route path='*' element={<h1>404 Not Found</h1>} />
+		</Routes>
+	);
+};
 export default App;

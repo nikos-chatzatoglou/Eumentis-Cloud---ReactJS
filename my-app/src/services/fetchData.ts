@@ -8,7 +8,7 @@ export async function fetchData(link:any) {
     catch (error) {
         console.log(error);
     }
-
+ 
     return response?.data;
 
 }
