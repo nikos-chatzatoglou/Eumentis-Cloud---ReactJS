@@ -34,6 +34,7 @@ type allUsersType = Array<userType>;
 const LoadMainPage = () => {
 	const [isLoading, setLoading] = useState(true);
 	const [users, setUsers] = useState<allUsersType>([]);
+	const [searchTerm, setSearchTerm] = useState<string>("");
 	const link = "https://jsonplaceholder.typicode.com/users";
 
 	const handleDelete = (id: number) => {
@@ -91,16 +92,29 @@ const LoadMainPage = () => {
 				<Loader />
 			) : (
 				<>
-					<SearchBar />
+					<SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 					<Row>
-						{users.map((row: userType) => (
-							<UserInfo
-								handleFavorite={handleFavorite}
-								updateUser={updateUser}
-								handleDelete={handleDelete}
-								user={row}
-							/>
-						))}
+						{users
+							.filter((users) => {
+								if (searchTerm === "") {
+									return users;
+								} else if (
+									users.name.toLowerCase().includes(searchTerm.toLowerCase())
+								) {
+									return users;
+								} else {
+									return null;
+								}
+							})
+							.map((user: userType) => (
+								<UserInfo
+									key={user.id}
+									user={user}
+									handleDelete={handleDelete}
+									handleFavorite={handleFavorite}
+									updateUser={updateUser}
+								/>
+							))}
 					</Row>
 				</>
 			)}
