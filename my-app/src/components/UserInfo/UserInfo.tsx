@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import { Card, Modal, Form, Input } from "antd";
 import {
@@ -16,6 +16,7 @@ import {
 	CardButton,
 	UserInfoWrapper,
 	UserDetailInfo,
+	UserInfoContainer,
 } from "./UserInfo.styles";
 
 type UserInfoProps = {
@@ -53,8 +54,6 @@ const UserInfo = ({
 	};
 
 	const handleCancel = () => {
-		console.log(user);
-
 		setIsModalVisible(false);
 	};
 
@@ -66,7 +65,7 @@ const UserInfo = ({
 	return (
 		<>
 			<Modal
-				title='Basic Modal'
+				title='Edit Contact'
 				visible={isModalVisible}
 				onCancel={handleCancel}
 				onOk={onOK}
@@ -100,7 +99,7 @@ const UserInfo = ({
 						initialValue={user.website}
 						label='Website'
 						name='website'
-						rules={[{ required: true, message: "This field is required!" }]}
+						rules={[{ message: "This field is required!" }]}
 					>
 						<Input />
 					</Form.Item>
@@ -125,32 +124,40 @@ const UserInfo = ({
 						)}
 					</CardButton>,
 					<CardButton onClick={showModal}>
-						{" "}
-						<EditOutlined />{" "}
+						<EditOutlined />
 					</CardButton>,
 					<CardButton
 						onClick={() => {
 							handleDelete(user.id);
 						}}
 					>
-						{" "}
-						<DeleteFilled />{" "}
+						<DeleteFilled />
 					</CardButton>,
 				]}
 			>
 				<h3>{user.name}</h3>
-				<UserInfoWrapper>
-					<MailOutlined />
-					<UserDetailInfo>{user.email}</UserDetailInfo>
-				</UserInfoWrapper>
-				<UserInfoWrapper>
-					<PhoneOutlined />
-					<UserDetailInfo>{user.phone}</UserDetailInfo>
-				</UserInfoWrapper>
-				<UserInfoWrapper>
-					<GlobalOutlined />
-					<UserDetailInfo>{user.website}</UserDetailInfo>
-				</UserInfoWrapper>
+				<UserInfoContainer>
+					<UserInfoWrapper>
+						<MailOutlined />
+						<UserDetailInfo>{user.email}</UserDetailInfo>
+					</UserInfoWrapper>
+					<UserInfoWrapper>
+						<PhoneOutlined />
+						{user.phone ? (
+							<UserDetailInfo>{user.phone}</UserDetailInfo>
+						) : (
+							<UserDetailInfo>Not Available</UserDetailInfo>
+						)}
+					</UserInfoWrapper>
+					<UserInfoWrapper>
+						<GlobalOutlined />
+						{user.website ? (
+							<UserDetailInfo>{user.website}</UserDetailInfo>
+						) : (
+							<UserDetailInfo>Not Available</UserDetailInfo>
+						)}
+					</UserInfoWrapper>
+				</UserInfoContainer>
 			</Card>
 		</>
 	);

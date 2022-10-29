@@ -18,7 +18,7 @@ const SearchBar = (props: SearchBarProps) => {
 			<SearchBarIcon />
 			<SearchBarInput
 				type='text'
-				placeholder='Search a Contact'
+				placeholder='Search for a Contact'
 				value={props.searchTerm}
 				onChange={(event) => handleChange(event)}
 			/>

@@ -2,11 +2,12 @@ import styled from "styled-components";
 import {FaSearch} from "react-icons/fa";
 
 export const SearchBarContainer = styled.div`
+    margin-left: 65px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 20%;
+    width: 400px;
     height: 100%;
     background-color: #fff;
     border-radius: 5px;
@@ -26,4 +27,5 @@ export const SearchBarInput = styled.input`
 export const SearchBarIcon = styled(FaSearch)`
     font-size: 1.2rem;
     color: #000;
+    margin-left: 15px;
 `;
