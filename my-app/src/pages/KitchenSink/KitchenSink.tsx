@@ -6,7 +6,6 @@ const KitchenSink = () => {
 	return (
 		<div>
 			<h1>Kitchen Sink</h1>
-			<SearchBar />
 		</div>
 	);
 };
