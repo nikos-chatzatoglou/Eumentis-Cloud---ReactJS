@@ -1,4 +1,4 @@
-## To run wihtout problems after download my-app folder, cd inside and run "npm install"
+## To run without problems after download my-app folder, cd inside and run "npm install"
 
 # Getting Started with Create React App
 
