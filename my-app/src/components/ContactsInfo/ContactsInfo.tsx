@@ -17,7 +17,7 @@ import {
 	UserInfoWrapper,
 	UserDetailInfo,
 	UserInfoContainer,
-} from "./UserInfo.styles";
+} from "./ContactsInfo.styles";
 
 type UserInfoProps = {
 	updateUser: (id: number, values: any) => void;

@@ -2,7 +2,7 @@ import { Row } from "antd";
 import React, { useState, useEffect } from "react";
 import Loader from "../../components/Loader/Loader";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import UserInfo from "../../components/UserInfo/UserInfo";
+import UserInfo from "../../components/ContactsInfo/ContactsInfo";
 import { getUser } from "../../services/getUser";
 
 type userType = {
@@ -31,7 +31,7 @@ type userType = {
 };
 type allUsersType = Array<userType>;
 
-const LoadMainPage = () => {
+const Contacts = () => {
 	const [isLoading, setLoading] = useState(true);
 	const [users, setUsers] = useState<allUsersType>([]);
 	const [searchTerm, setSearchTerm] = useState<string>("");
@@ -122,4 +122,4 @@ const LoadMainPage = () => {
 	);
 };
 
-export default LoadMainPage;
+export default Contacts;
