@@ -5,7 +5,7 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import UserInfo from "../../components/ContactsInfo/ContactsInfo";
 import { getUser } from "../../services/getUser";
 
-type userType = {
+export type userType = {
 	favorite: boolean;
 	id: number;
 	name: string;

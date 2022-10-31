@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import {FaSearch} from "react-icons/fa";
+import { SearchOutlined } from "@ant-design/icons";
 
 export const SearchBarContainer = styled.div`
+    margin-top: 25px;
     margin-left: 65px;
     display: flex;
     flex-direction: row;
@@ -24,8 +26,9 @@ export const SearchBarInput = styled.input`
     background-color: transparent;
 `;
 
-export const SearchBarIcon = styled(FaSearch)`
+export const SearchBarIcon = styled(SearchOutlined)`
     font-size: 1.2rem;
     color: #000;
     margin-left: 15px;
 `;
+

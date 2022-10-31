@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Card, Modal, Form, Input } from "antd";
+import { Form, Input } from "antd";
 import {
 	HeartFilled,
 	HeartOutlined,
@@ -17,13 +17,18 @@ import {
 	UserInfoWrapper,
 	UserDetailInfo,
 	UserInfoContainer,
+	ContactsCard,
+	StyledDivider,
+	StyledModal,
+	StyledForm,
 } from "./ContactsInfo.styles";
+import { userType } from "../../pages/Contacts/Contacts";
 
 type UserInfoProps = {
 	updateUser: (id: number, values: any) => void;
 	handleDelete: (id: number) => void;
 	handleFavorite: (id: number, value: boolean) => void;
-	user: any;
+	user: userType;
 };
 
 const UserInfo = ({
@@ -64,13 +69,13 @@ const UserInfo = ({
 
 	return (
 		<>
-			<Modal
+			<StyledModal
 				title='Edit Contact'
 				visible={isModalVisible}
 				onCancel={handleCancel}
 				onOk={onOK}
 			>
-				<Form form={form}>
+				<StyledForm form={form} layout='vertical'>
 					<Form.Item
 						initialValue={user.name}
 						label='Name'
@@ -104,16 +109,20 @@ const UserInfo = ({
 						<Input />
 					</Form.Item>
 					<Form.Item initialValue={user.username} name='username'></Form.Item>
-				</Form>
-			</Modal>
+				</StyledForm>
+			</StyledModal>
 
-			<Card
+			<ContactsCard
 				style={{ margin: 15, left: 50 }}
+				hoverable
 				cover={
-					<AvatarImg
-						alt='Avatar'
-						src={`https://avatars.dicebear.com/v2/avataaars/${user.username}.svg?options[mood][]=happy`}
-					/>
+					<>
+						<AvatarImg
+							alt='Avatar'
+							src={`https://avatars.dicebear.com/v2/avataaars/${user.username}.svg?options[mood][]=happy`}
+						/>
+						<StyledDivider plain>{user.name}</StyledDivider>
+					</>
 				}
 				actions={[
 					<CardButton onClick={handleLove}>
@@ -135,7 +144,6 @@ const UserInfo = ({
 					</CardButton>,
 				]}
 			>
-				<h3>{user.name}</h3>
 				<UserInfoContainer>
 					<UserInfoWrapper>
 						<MailOutlined />
@@ -158,7 +166,7 @@ const UserInfo = ({
 						)}
 					</UserInfoWrapper>
 				</UserInfoContainer>
-			</Card>
+			</ContactsCard>
 		</>
 	);
 };
