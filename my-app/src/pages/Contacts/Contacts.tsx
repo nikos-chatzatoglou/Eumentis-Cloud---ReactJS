@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import Loader from "../../components/Loader/Loader";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import UserInfo from "../../components/ContactsInfo/ContactsInfo";
-import { getUser } from "../../services/getUser";
+import { getContact } from "../../services/getContact";
 
-export type userType = {
+export type contactType = {
 	favorite: boolean;
 	id: number;
 	name: string;
@@ -29,16 +29,16 @@ export type userType = {
 		bs: string;
 	};
 };
-type allUsersType = Array<userType>;
+type allContactType = Array<contactType>;
 
 const Contacts = () => {
 	const [isLoading, setLoading] = useState(true);
-	const [users, setUsers] = useState<allUsersType>([]);
+	const [users, setUsers] = useState<allContactType>([]);
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const link = "https://jsonplaceholder.typicode.com/users";
 
 	const handleDelete = (id: number) => {
-		const newList = users.filter((item: userType) => item.id !== id);
+		const newList = users.filter((item: contactType) => item.id !== id);
 		setUsers(newList);
 		localStorage.setItem("users", JSON.stringify(newList));
 	};
@@ -50,7 +50,7 @@ const Contacts = () => {
 		setUsers(users);
 		localStorage.setItem("users", JSON.stringify(users));
 	};
-	const updateUser = (id: number, values: userType) => {
+	const updateContact = (id: number, values: contactType) => {
 		const index = users.findIndex(
 			(element: { id: number }) => element.id === id,
 			values
@@ -63,8 +63,8 @@ const Contacts = () => {
 
 	useEffect(() => {
 		const setValues = async () => {
-			const response = await getUser(link);
-			//Below i append favorite property to each user
+			const response = await getContact(link);
+			//Below i append favorite property to each contact
 			const usersWithFavorite = response.map((item: { favorite: boolean }) => {
 				item.favorite = false;
 				return item;
@@ -106,13 +106,13 @@ const Contacts = () => {
 									return null;
 								}
 							})
-							.map((user: userType) => (
+							.map((contact: contactType) => (
 								<UserInfo
-									key={user.id}
-									user={user}
+									key={contact.id}
+									contact={contact}
 									handleDelete={handleDelete}
 									handleFavorite={handleFavorite}
-									updateUser={updateUser}
+									updateContact={updateContact}
 								/>
 							))}
 					</Row>

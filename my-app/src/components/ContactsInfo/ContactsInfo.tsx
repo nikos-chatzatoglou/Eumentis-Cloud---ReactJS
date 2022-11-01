@@ -22,24 +22,24 @@ import {
 	StyledModal,
 	StyledForm,
 } from "./ContactsInfo.styles";
-import { userType } from "../../pages/Contacts/Contacts";
+import { contactType } from "../../pages/Contacts/Contacts";
 
 type UserInfoProps = {
-	updateUser: (id: number, values: any) => void;
+	updateContact: (id: number, values: any) => void;
 	handleDelete: (id: number) => void;
 	handleFavorite: (id: number, value: boolean) => void;
-	user: userType;
+	contact: contactType;
 };
 
 const UserInfo = ({
-	updateUser,
+	updateContact,
 	handleDelete,
 	handleFavorite,
-	user,
+	contact,
 }: UserInfoProps) => {
 	const [isModalVisible, setIsModalVisible] = useState(false);
 	const [form] = Form.useForm();
-	const [favoriteStatus, setFavoriteStatus] = useState(user.favorite);
+	const [favoriteStatus, setFavoriteStatus] = useState(contact.favorite);
 
 	const showModal = () => {
 		setIsModalVisible(true);
@@ -50,7 +50,7 @@ const UserInfo = ({
 			.validateFields()
 			.then((values) => {
 				form.setFieldsValue(values);
-				updateUser(user.id, values);
+				updateContact(contact.id, values);
 			})
 			.catch((info) => {
 				console.log("Validate Failed:", info);
@@ -63,7 +63,7 @@ const UserInfo = ({
 	};
 
 	const handleLove = () => {
-		handleFavorite(user.id, !favoriteStatus);
+		handleFavorite(contact.id, !favoriteStatus);
 		setFavoriteStatus(!favoriteStatus);
 	};
 
@@ -77,7 +77,7 @@ const UserInfo = ({
 			>
 				<StyledForm form={form} layout='vertical'>
 					<Form.Item
-						initialValue={user.name}
+						initialValue={contact.name}
 						label='Name'
 						name='name'
 						rules={[{ required: true, message: "This field is required!" }]}
@@ -85,7 +85,7 @@ const UserInfo = ({
 						<Input />
 					</Form.Item>
 					<Form.Item
-						initialValue={user.email}
+						initialValue={contact.email}
 						label='Email'
 						name='email'
 						rules={[{ required: true, message: "This field is required!" }]}
@@ -93,7 +93,7 @@ const UserInfo = ({
 						<Input />
 					</Form.Item>
 					<Form.Item
-						initialValue={user.phone}
+						initialValue={contact.phone}
 						label='Phone'
 						name='phone'
 						rules={[{ required: false }]}
@@ -101,14 +101,17 @@ const UserInfo = ({
 						<Input />
 					</Form.Item>
 					<Form.Item
-						initialValue={user.website}
+						initialValue={contact.website}
 						label='Website'
 						name='website'
 						rules={[{ message: "This field is required!" }]}
 					>
 						<Input />
 					</Form.Item>
-					<Form.Item initialValue={user.username} name='username'></Form.Item>
+					<Form.Item
+						initialValue={contact.username}
+						name='username'
+					></Form.Item>
 				</StyledForm>
 			</StyledModal>
 
@@ -119,14 +122,14 @@ const UserInfo = ({
 					<>
 						<AvatarImg
 							alt='Avatar'
-							src={`https://avatars.dicebear.com/v2/avataaars/${user.username}.svg?options[mood][]=happy`}
+							src={`https://avatars.dicebear.com/v2/avataaars/${contact.username}.svg?options[mood][]=happy`}
 						/>
-						<StyledDivider plain>{user.name}</StyledDivider>
+						<StyledDivider plain>{contact.name}</StyledDivider>
 					</>
 				}
 				actions={[
 					<CardButton onClick={handleLove}>
-						{user.favorite ? (
+						{contact.favorite ? (
 							<HeartFilled style={{ color: "#FF0000" }} />
 						) : (
 							<HeartOutlined style={{ color: "#FF0000" }} />
@@ -137,7 +140,7 @@ const UserInfo = ({
 					</CardButton>,
 					<CardButton
 						onClick={() => {
-							handleDelete(user.id);
+							handleDelete(contact.id);
 						}}
 					>
 						<DeleteFilled />
@@ -147,20 +150,20 @@ const UserInfo = ({
 				<UserInfoContainer>
 					<UserInfoWrapper>
 						<MailOutlined />
-						<UserDetailInfo>{user.email}</UserDetailInfo>
+						<UserDetailInfo>{contact.email}</UserDetailInfo>
 					</UserInfoWrapper>
 					<UserInfoWrapper>
 						<PhoneOutlined />
-						{user.phone ? (
-							<UserDetailInfo>{user.phone}</UserDetailInfo>
+						{contact.phone ? (
+							<UserDetailInfo>{contact.phone}</UserDetailInfo>
 						) : (
 							<UserDetailInfo>Not Available</UserDetailInfo>
 						)}
 					</UserInfoWrapper>
 					<UserInfoWrapper>
 						<GlobalOutlined />
-						{user.website ? (
-							<UserDetailInfo>{user.website}</UserDetailInfo>
+						{contact.website ? (
+							<UserDetailInfo>{contact.website}</UserDetailInfo>
 						) : (
 							<UserDetailInfo>Not Available</UserDetailInfo>
 						)}

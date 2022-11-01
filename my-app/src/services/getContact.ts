@@ -1,6 +1,6 @@
 import { fetchData } from "./fetchData";
 
-export function getUser(link:string) {
+export function getContact(link:string) {
     fetchData(link);
     return fetchData(link);
 } 
