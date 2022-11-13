@@ -4,7 +4,7 @@ import Loader from "../../components/Loader/Loader";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import UserInfo from "../../components/ContactsInfo/ContactsInfo";
 import { getContact } from "../../services/getContact";
-import { StyledButton } from "./Contacts.styles";
+import { StyledButton, Wrapper, Text } from "./Contacts.styles";
 
 export type contactType = {
 	favorite: boolean;
@@ -61,9 +61,6 @@ const AddNewContactForm = ({ visible, onCreate, onCancel, users }: any) => {
 					modifier: "public",
 				}}
 			>
-				<Form.Item name='id' initialValue={users.length + 1}></Form.Item>
-				<Form.Item name='favorite' initialValue={false}></Form.Item>
-
 				<Form.Item
 					label='Username'
 					name='username'
@@ -100,6 +97,8 @@ const AddNewContactForm = ({ visible, onCreate, onCancel, users }: any) => {
 					name='modifier'
 					className='collection-create-form_last-form-item'
 				></Form.Item>
+				<Form.Item name='id' initialValue={users.length + 1}></Form.Item>
+				<Form.Item name='favorite' initialValue={false}></Form.Item>
 			</Form>
 		</Modal>
 	);
@@ -178,8 +177,10 @@ const Contacts = () => {
 				<Loader />
 			) : (
 				<>
-					<SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-					<h3>You have {users.length} Contacts</h3>
+					<Wrapper>
+						<SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+						<Text>You have {users.length} Contacts</Text>
+					</Wrapper>
 
 					<StyledButton
 						type='primary'
@@ -187,7 +188,7 @@ const Contacts = () => {
 							setIsModalVisible(true);
 						}}
 					>
-						New Collection
+						Add Contact
 					</StyledButton>
 
 					<AddNewContactForm
