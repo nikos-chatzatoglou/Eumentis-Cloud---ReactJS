@@ -32,9 +32,9 @@ export type contactType = {
 };
 type allContactType = Array<contactType>;
 
-const AddNewContactForm = ({ visible, onCreate, onCancel, users }: any) => {
+const AddNewContactForm = ({ visible, onCreate, onCancel, contacts }: any) => {
 	const [form] = Form.useForm();
-	const [idCounter, setIdCounter] = useState(users.length + 1);
+	const [idCounter, setIdCounter] = useState(contacts.length + 1);
 
 	return (
 		<Modal
@@ -110,32 +110,32 @@ const AddNewContactForm = ({ visible, onCreate, onCancel, users }: any) => {
 
 const Contacts = () => {
 	const [isLoading, setLoading] = useState(true);
-	const [users, setUsers] = useState<allContactType>([]);
+	const [contacts, setContacts] = useState<allContactType>([]);
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const link = "https://jsonplaceholder.typicode.com/users";
 	const [isModalVisible, setIsModalVisible] = useState(false);
 	const handleDelete = (id: number) => {
-		const newList = users.filter((item: contactType) => item.id !== id);
-		setUsers(newList);
-		localStorage.setItem("users", JSON.stringify(newList));
+		const newList = contacts.filter((item: contactType) => item.id !== id);
+		setContacts(newList);
+		localStorage.setItem("contacts", JSON.stringify(newList));
 	};
 	const handleFavorite = (id: number, value: boolean) => {
-		const index = users.findIndex(
+		const index = contacts.findIndex(
 			(element: { id: number }) => element.id === id
 		);
-		users[index].favorite = value;
-		setUsers(users);
-		localStorage.setItem("users", JSON.stringify(users));
+		contacts[index].favorite = value;
+		setContacts(contacts);
+		localStorage.setItem("contacts", JSON.stringify(contacts));
 	};
 	const updateContact = (id: number, values: contactType) => {
-		const index = users.findIndex(
+		const index = contacts.findIndex(
 			(element: { id: number }) => element.id === id,
 			values
 		);
-		users[index] = values;
-		const usersAfterEdit = [...users];
-		setUsers(usersAfterEdit);
-		localStorage.setItem("users", JSON.stringify(usersAfterEdit));
+		contacts[index] = values;
+		const usersAfterEdit = [...contacts];
+		setContacts(usersAfterEdit);
+		localStorage.setItem("contacts", JSON.stringify(usersAfterEdit));
 	};
 
 	useEffect(() => {
@@ -146,19 +146,19 @@ const Contacts = () => {
 				item.favorite = false;
 				return item;
 			});
-			setUsers(usersWithFavorite);
+			setContacts(usersWithFavorite);
 			setLoading(false);
 		};
 		if (
-			localStorage.getItem("users") === null ||
-			localStorage.getItem("users") === "[]"
+			localStorage.getItem("contacts") === null ||
+			localStorage.getItem("contacts") === "[]"
 		) {
 			setValues();
 		} else {
 			const usersFromLocalStorage = JSON.parse(
-				localStorage.getItem("users") || "{}"
+				localStorage.getItem("contacts") || "{}"
 			);
-			setUsers(usersFromLocalStorage);
+			setContacts(usersFromLocalStorage);
 			setLoading(false);
 		}
 	}, []);
@@ -166,14 +166,13 @@ const Contacts = () => {
 	const onCreate = (values: contactType) => {
 		console.log("Received values of form: ", values);
 		setIsModalVisible(false);
-		AddUsers(values);
+		AddContact(values);
 	};
 
-	const AddUsers = (newContact: contactType) => {
-		const usersAfterAdd = [...users, newContact];
-		setUsers(usersAfterAdd);
-		localStorage.setItem("users", JSON.stringify(usersAfterAdd));
-		console.log(usersAfterAdd);
+	const AddContact = (newContact: contactType) => {
+		const usersAfterAdd = [...contacts, newContact];
+		setContacts(usersAfterAdd);
+		localStorage.setItem("contacts", JSON.stringify(usersAfterAdd));
 	};
 
 	return (
@@ -184,7 +183,7 @@ const Contacts = () => {
 				<>
 					<Wrapper>
 						<SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-						<Text>You have {users.length} Contacts</Text>
+						<Text>You have {contacts.length} Contacts</Text>
 					</Wrapper>
 
 					<StyledButton
@@ -202,18 +201,18 @@ const Contacts = () => {
 						onCancel={() => {
 							setIsModalVisible(false);
 						}}
-						users={users}
+						contacts={contacts}
 					/>
 
 					<Row>
-						{users
-							.filter((users) => {
+						{contacts
+							.filter((contacts) => {
 								if (searchTerm === "") {
-									return users;
+									return contacts;
 								} else if (
-									users.name.toLowerCase().includes(searchTerm.toLowerCase())
+									contacts.name.toLowerCase().includes(searchTerm.toLowerCase())
 								) {
-									return users;
+									return contacts;
 								} else {
 									return null;
 								}
