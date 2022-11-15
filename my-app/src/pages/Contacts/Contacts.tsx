@@ -34,6 +34,8 @@ type allContactType = Array<contactType>;
 
 const AddNewContactForm = ({ visible, onCreate, onCancel, users }: any) => {
 	const [form] = Form.useForm();
+	const [idCounter, setIdCounter] = useState(users.length + 1);
+
 	return (
 		<Modal
 			visible={visible}
@@ -42,6 +44,8 @@ const AddNewContactForm = ({ visible, onCreate, onCancel, users }: any) => {
 			cancelText='Cancel'
 			onCancel={onCancel}
 			onOk={() => {
+				setIdCounter(idCounter + 1);
+
 				form
 					.validateFields()
 					.then((values) => {
@@ -97,7 +101,7 @@ const AddNewContactForm = ({ visible, onCreate, onCancel, users }: any) => {
 					name='modifier'
 					className='collection-create-form_last-form-item'
 				></Form.Item>
-				<Form.Item name='id' initialValue={users.length + 1}></Form.Item>
+				<Form.Item name='id' initialValue={idCounter}></Form.Item>
 				<Form.Item name='favorite' initialValue={false}></Form.Item>
 			</Form>
 		</Modal>
@@ -169,6 +173,7 @@ const Contacts = () => {
 		const usersAfterAdd = [...users, newContact];
 		setUsers(usersAfterAdd);
 		localStorage.setItem("users", JSON.stringify(usersAfterAdd));
+		console.log(usersAfterAdd);
 	};
 
 	return (
