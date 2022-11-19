@@ -148,6 +148,8 @@ const Contacts = () => {
 			});
 			setContacts(usersWithFavorite);
 			setLoading(false);
+			
+
 		};
 		if (
 			localStorage.getItem("contacts") === null ||
