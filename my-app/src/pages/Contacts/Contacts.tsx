@@ -47,19 +47,32 @@ const Contacts = () => {
 		const index = contacts.findIndex(
 			(element: { id: number }) => element.id === id
 		);
-		contacts[index].favorite = value;
-		setContacts(contacts);
-		localStorage.setItem("contacts", JSON.stringify(contacts));
+		// update the favorite status for the contact
+
+		const newList = [...contacts];
+		newList[index].favorite = value;
+		setContacts(newList);
+		localStorage.setItem("contacts", JSON.stringify(newList));
+		console.log("favorite", contacts[index]);
 	};
 	const updateContact = (id: number, values: contactType) => {
 		const index = contacts.findIndex(
 			(element: { id: number }) => element.id === id,
 			values
 		);
-		contacts[index] = values;
-		const usersAfterEdit = [...contacts];
-		setContacts(usersAfterEdit);
-		localStorage.setItem("contacts", JSON.stringify(usersAfterEdit));
+
+		const newList = [...contacts];
+		newList[index].favorite = contacts[index].favorite;
+		newList[index].id = contacts[index].id;
+		newList[index].name = values.name;
+		newList[index].username = values.username;
+		newList[index].email = values.email;
+		newList[index].phone = values.phone;
+		newList[index].website = values.website;
+		newList[index].address = values.address;
+		newList[index].company = values.company;
+		setContacts(newList);
+		localStorage.setItem("contacts", JSON.stringify(newList));
 	};
 
 	useEffect(() => {
@@ -72,8 +85,6 @@ const Contacts = () => {
 			});
 			setContacts(usersWithFavorite);
 			setLoading(false);
-			
-
 		};
 		if (
 			localStorage.getItem("contacts") === null ||
@@ -100,6 +111,7 @@ const Contacts = () => {
 		setContacts(usersAfterAdd);
 		localStorage.setItem("contacts", JSON.stringify(usersAfterAdd));
 	};
+	console.log(contacts);
 
 	return (
 		<>
