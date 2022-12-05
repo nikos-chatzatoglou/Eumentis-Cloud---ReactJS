@@ -56,6 +56,7 @@ const Contacts = () => {
 		console.log("favorite", contacts[index]);
 	};
 	const updateContact = (id: number, values: contactType) => {
+		console.log("values", values);
 		const index = contacts.findIndex(
 			(element: { id: number }) => element.id === id,
 			values
@@ -111,7 +112,6 @@ const Contacts = () => {
 		setContacts(usersAfterAdd);
 		localStorage.setItem("contacts", JSON.stringify(usersAfterAdd));
 	};
-	console.log(contacts);
 
 	return (
 		<>

@@ -19,10 +19,9 @@ import {
 	UserInfoContainer,
 	ContactsCard,
 	StyledDivider,
-	StyledModal,
-	StyledForm,
 } from "./ContactsInfo.styles";
 import { contactType } from "../../pages/Contacts/Contacts";
+import EditContactForm from "../EditContactForm/EditContactForm";
 
 type UserInfoProps = {
 	updateContact: (id: number, values: any) => void;
@@ -37,29 +36,20 @@ const UserInfo = ({
 	handleFavorite,
 	contact,
 }: UserInfoProps) => {
-	const [isModalVisible, setIsModalVisible] = useState(false);
+	const [isEditContactFormVisible, setIsEditContactFormVisible] =
+		useState(false);
 	const [form] = Form.useForm();
 	const [favoriteStatus, setFavoriteStatus] = useState(contact.favorite);
 
 	const showModal = () => {
-		setIsModalVisible(true);
+		setIsEditContactFormVisible(true);
 	};
-
-	const onOK = () => {
-		form
-			.validateFields()
-			.then((values) => {
-				form.setFieldsValue(values);
-				updateContact(contact.id, values);
-			})
-			.catch((info) => {
-				console.log("Validate Failed:", info);
-			});
-		setIsModalVisible(false);
+	const hideModal = () => {
+		setIsEditContactFormVisible(false);
 	};
 
 	const handleCancel = () => {
-		setIsModalVisible(false);
+		setIsEditContactFormVisible(false);
 	};
 
 	const handleLove = () => {
@@ -69,51 +59,13 @@ const UserInfo = ({
 
 	return (
 		<>
-			<StyledModal
-				title='Edit Contact'
-				visible={isModalVisible}
-				onCancel={handleCancel}
-				onOk={onOK}
-			>
-				<StyledForm form={form} layout='vertical'>
-					<Form.Item
-						initialValue={contact.name}
-						label='Name'
-						name='name'
-						rules={[{ required: true, message: "This field is required!" }]}
-					>
-						<Input />
-					</Form.Item>
-					<Form.Item
-						initialValue={contact.email}
-						label='Email'
-						name='email'
-						rules={[{ required: true, message: "This field is required!" }]}
-					>
-						<Input />
-					</Form.Item>
-					<Form.Item
-						initialValue={contact.phone}
-						label='Phone'
-						name='phone'
-						rules={[{ required: false }]}
-					>
-						<Input />
-					</Form.Item>
-					<Form.Item
-						initialValue={contact.website}
-						label='Website'
-						name='website'
-						rules={[{ message: "This field is required!" }]}
-					>
-						<Input />
-					</Form.Item>
-					<Form.Item
-						initialValue={contact.username}
-						name='username'
-					></Form.Item>
-				</StyledForm>
-			</StyledModal>
+			<EditContactForm
+				isEditContactFormVisible={isEditContactFormVisible}
+				handleCancel={handleCancel}
+				updateContact={updateContact}
+				contact={contact}
+				hideModal={hideModal}
+			/>
 
 			<ContactsCard
 				style={{ margin: 15, left: 50 }}
