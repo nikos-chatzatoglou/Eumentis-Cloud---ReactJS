@@ -48,7 +48,6 @@ const Contacts = () => {
 			(element: { id: number }) => element.id === id
 		);
 		// update the favorite status for the contact
-
 		const newList = [...contacts];
 		newList[index].favorite = value;
 		setContacts(newList);
@@ -63,15 +62,12 @@ const Contacts = () => {
 		);
 
 		const newList = [...contacts];
-		newList[index].favorite = contacts[index].favorite;
-		newList[index].id = contacts[index].id;
-		newList[index].name = values.name;
-		newList[index].username = values.username;
-		newList[index].email = values.email;
-		newList[index].phone = values.phone;
-		newList[index].website = values.website;
-		newList[index].address = values.address;
-		newList[index].company = values.company;
+		newList[index] = Object.assign(
+			{},
+			values,
+			{ favorite: contacts[index].favorite },
+			{ id: contacts[index].id }
+		);
 		setContacts(newList);
 		localStorage.setItem("contacts", JSON.stringify(newList));
 	};
