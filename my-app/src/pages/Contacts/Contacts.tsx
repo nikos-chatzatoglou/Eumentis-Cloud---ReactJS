@@ -1,4 +1,4 @@
-import { Form, Input, Modal, Row } from "antd";
+import { Row } from "antd";
 import React, { useState, useEffect } from "react";
 import Loader from "../../components/Loader/Loader";
 import SearchBar from "../../components/SearchBar/SearchBar";
