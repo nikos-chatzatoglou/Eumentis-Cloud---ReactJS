@@ -4,7 +4,7 @@ import Loader from "../../components/Loader/Loader";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import UserInfo from "../../components/ContactsInfo/ContactsInfo";
 import { getContact } from "../../services/getContact";
-import { StyledButton, Wrapper, Text } from "./Contacts.styles";
+import { StyledButton, Wrapper, Text, Container } from "./Contacts.styles";
 import AddNewContactForm from "../../components/AddNewContactForm/AddNewContactForm";
 
 export type contactType = {
@@ -114,7 +114,7 @@ const Contacts = () => {
 			{isLoading === true ? (
 				<Loader />
 			) : (
-				<>
+				<Container>
 					<Wrapper>
 						<SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 						<Text>You have {contacts.length} Contacts</Text>
@@ -161,7 +161,7 @@ const Contacts = () => {
 								/>
 							))}
 					</Row>
-				</>
+				</Container>
 			)}
 		</>
 	);

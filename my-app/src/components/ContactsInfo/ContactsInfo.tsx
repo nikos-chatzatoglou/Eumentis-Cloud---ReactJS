@@ -22,6 +22,7 @@ import {
 } from "./ContactsInfo.styles";
 import { contactType } from "../../pages/Contacts/Contacts";
 import EditContactForm from "../EditContactForm/EditContactForm";
+import { Container } from "../../pages/Home/Home.styles";
 
 type UserInfoProps = {
 	updateContact: (id: number, values: any) => void;

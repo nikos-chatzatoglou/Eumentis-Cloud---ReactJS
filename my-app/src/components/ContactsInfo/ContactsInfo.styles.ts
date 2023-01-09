@@ -5,6 +5,7 @@ import { Divider, Form, Modal } from 'antd';
 export const ContactsCard  = styled(Card)`
 left: 50px;
 border-radius: 5px;
+//background-color: transparent ;
 cursor:auto;
 `;
 
@@ -12,6 +13,7 @@ export const UserInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+  //background-color: transparent !important;
 `;
 
 export const UserDetailInfo = styled.p`
@@ -22,6 +24,7 @@ export const UserInfoWrapper = styled.div`
   display: flex; 
   flex-direction: row; 
   align-items: baseline;
+  //background-color: transparent !important;
   `;
 
 export const CardButton = styled.button`
@@ -51,6 +54,6 @@ export const AvatarImg = styled.img`
 export const StyledDivider= styled(Divider)`
 font-weight: 500 !important;;
 font-size: 24px !important;
-color: #000;
+
 `;
 

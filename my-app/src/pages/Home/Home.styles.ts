@@ -5,7 +5,8 @@ export const Container = styled.div`
  display: flex;
  justify-content: center;
  align-items: center;
- background: linear-gradient(180deg, #fff 0%, #0056b3 100%);
+ background: linear-gradient(180deg, #fff 0%, #B5B2AF 250%);
+ 
  min-height: 100vh;
 `;
     
@@ -19,7 +20,7 @@ export const TextWrapper = styled.div`
 
 export const StyledTitle = styled.h1`
     font-size: 48px;
-    color: #fff;
+    
     margin-bottom: 24px;
     text-align: center;
     font-weight: 500;
@@ -29,7 +30,6 @@ export const StyledTitle = styled.h1`
 `;
 export const StyledText = styled.p`
     font-size: 24px;
-    color: #fff;
     margin-bottom: 24px;
     text-align: center;
     font-weight: 500;
