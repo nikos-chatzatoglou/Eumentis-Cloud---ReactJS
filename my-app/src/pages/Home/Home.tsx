@@ -6,6 +6,7 @@ import {
 	StyledTitle,
 	TextWrapper,
 } from "./Home.styles";
+import { Link } from "react-router-dom";
 
 const Home = () => {
 	return (
@@ -17,6 +18,9 @@ const Home = () => {
 					and generating random avatars using avatars.dicebear.com
 				</StyledText>
 				<StyledButton>Go to contacts</StyledButton>
+				<Link to='/Contacts'>
+					<div>Click</div>
+				</Link>
 			</TextWrapper>
 			<div>
 				<StyledImage

@@ -1,24 +1,20 @@
 import React from "react";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+
 import Contacts from "./pages/Contacts/Contacts";
 import Home from "./pages/Home/Home";
 import KitchenSink from "./pages/KitchenSink/KitchenSink";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/Header/Header";
 const App = () => {
 	return (
-
-		<Routes>
-			<Route path='/' element={<Contacts />} />
-			<Route path='/kitchenSink' element={<KitchenSink />} />
-			<Route path='/home' element= {<Home/>}/>
-
-			<Route path='*' element={<h1>404 Not Found</h1>} />
-		</Routes>
-		
+		<>
+			<Header></Header>
+			<Routes>
+				<Route path='/' element={<Home />}></Route>
+				<Route path='/contacts' element={<Contacts />}></Route>
+				<Route path='*' element={<h1>404 Not Found</h1>}></Route>
+			</Routes>
+		</>
 	);
 };
 export default App;
