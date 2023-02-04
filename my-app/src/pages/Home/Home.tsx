@@ -17,9 +17,9 @@ const Home = () => {
 				<StyledText>
 					and generating random avatars using avatars.dicebear.com
 				</StyledText>
-				<StyledButton>Go to contacts</StyledButton>
+
 				<Link to='/Contacts'>
-					<div>Click</div>
+					<StyledButton>Go to contacts</StyledButton>
 				</Link>
 			</TextWrapper>
 			<div>
