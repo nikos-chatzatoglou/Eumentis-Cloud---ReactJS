@@ -4,7 +4,13 @@ import Loader from "../../components/Loader/Loader";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import UserInfo from "../../components/ContactsInfo/ContactsInfo";
 import { getContact } from "../../services/getContact";
-import { StyledButton, Wrapper, Text, Container } from "./Contacts.styles";
+import {
+	StyledButton,
+	Wrapper,
+	Text,
+	Container,
+	SocialMsg,
+} from "./Contacts.styles";
 import AddNewContactForm from "../../components/AddNewContactForm/AddNewContactForm";
 
 export type contactType = {
@@ -118,6 +124,15 @@ const Contacts = () => {
 					<Wrapper>
 						<SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 						<Text>You have {contacts.length} Contacts</Text>
+						{contacts.length <= 3 ? (
+							<SocialMsg>
+								You reached the limit of anti-social!
+								{/* That's it Game Over. Go
+								get another Life. */}
+							</SocialMsg>
+						) : (
+							<></>
+						)}
 					</Wrapper>
 
 					<StyledButton

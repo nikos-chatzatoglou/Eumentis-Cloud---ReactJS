@@ -18,3 +18,9 @@ export const Text = styled.p`
     font-size: 20px;
     margin: 25px 70px 0 0px;
     `;
+    export const SocialMsg = styled.p`
+    font-size: 20px;
+    margin: 25px 70px 0 0px;
+    color: red;
+    text-decoration: underline;
+    `;
