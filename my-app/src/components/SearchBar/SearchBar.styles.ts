@@ -14,6 +14,12 @@ export const SearchBarContainer = styled.div`
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+      @media only screen and (max-width: 480px) {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 10px;
+  }
+
 `;
 
 export const SearchBarInput = styled.input`
