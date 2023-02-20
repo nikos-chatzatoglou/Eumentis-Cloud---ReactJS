@@ -12,6 +12,7 @@ const App = () => {
 			<Routes>
 				<Route path='/' element={<Home />}></Route>
 				<Route path='/contacts' element={<Contacts />}></Route>
+				<Route path='/KitchenSink' element={<KitchenSink />}></Route>
 				<Route path='*' element={<h1>404 Not Found</h1>}></Route>
 			</Routes>
 		</>
