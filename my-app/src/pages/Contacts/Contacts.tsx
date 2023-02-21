@@ -10,6 +10,7 @@ import {
 	Text,
 	Container,
 	SocialMsg,
+	Info,
 } from "./Contacts.styles";
 import AddNewContactForm from "../../components/AddNewContactForm/AddNewContactForm";
 
@@ -53,7 +54,7 @@ const Contacts = () => {
 		const index = contacts.findIndex(
 			(element: { id: number }) => element.id === id
 		);
-		// update the favorite status for the contact
+		// update the favorite status of the contact
 		const newList = [...contacts];
 		newList[index].favorite = value;
 		setContacts(newList);
@@ -123,26 +124,24 @@ const Contacts = () => {
 				<Container>
 					<Wrapper>
 						<SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-						<Text>You have {contacts.length} Contacts</Text>
-						{contacts.length <= 3 ? (
-							<SocialMsg>
-								You reached the limit of anti-social!
-								{/* That's it Game Over. Go
-								get another Life. */}
-							</SocialMsg>
-						) : (
-							<></>
-						)}
-					</Wrapper>
+						<StyledButton
+							type='primary'
+							size='small'
+							block={true}
+							onClick={() => {
+								setIsModalVisible(true);
+							}}
+						>
+							Add Contact
+						</StyledButton>
 
-					<StyledButton
-						type='primary'
-						onClick={() => {
-							setIsModalVisible(true);
-						}}
-					>
-						Add Contact
-					</StyledButton>
+						{/* have to find a solution for responsive
+						<Info
+							onClick={() => {
+								console.log("show status message");
+							}}
+						></Info> */}
+					</Wrapper>
 
 					<AddNewContactForm
 						visible={isModalVisible}
