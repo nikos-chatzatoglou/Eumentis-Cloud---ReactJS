@@ -14,11 +14,12 @@ export const SearchBarContainer = styled.div`
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
       
     @media only screen and (max-width: 480px) {
-    margin-left: 0;
+    /* margin-left: 0;
     margin-right: 0;
     padding: 10px;
     border-radius: 0px;
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2); */
+     display: none;
     
   }
 

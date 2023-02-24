@@ -1,49 +1,46 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-interface IContainerProps {
-	isMenuOpen: boolean;
-}
+import { FaBars } from 'react-icons/fa'
+import styled from 'styled-components'
+import {Link } from 'react-router-dom'
 
-export const Container = styled.div`
+export const PrimaryNav = styled.nav`
+  z-index: 14;
+  height: 90px;
   display: flex;
-  background-color: cornflowerblue;
-  width: 100%;
-  justify-content: space-between;
+  background: #E1EEDD;
+  //justify-content: space-between;
+  //padding: 0.18rem calc((100vw - 1000px) / 2);
+`
+export const MenuLink = styled(Link)`
+  color: #000;
+  display: flex;
+  cursor: pointer;
   align-items: center;
-  padding: 10px;
-  @media (max-width: 768px) {
-    justify-content: flex-end;
+  text-decoration: none;
+  padding: 0 1.2rem;
+  height: 100%;
+  &.active {
+    color: #000000;
   }
-`;
-  
-  /* @media screen and (max-width: 768px) {
-    position: fixed;
+`
+export const Hamburger = styled(FaBars)`
+  display: none;
+  color: #1890FF;
+  @media screen and (max-width: 480px) {
+    display: block;
+    font-size: 1.5rem;
     top: 0;
-    left: ${({ isOpen }) => (isOpen ? 0 : '-100%')};
-    width: 100%;
-    height: 100vh;
-    z-index: 1;
-    transition: all 0.3s ease-in-out;
+    right: 0;
+    position: absolute;
+    cursor: pointer;
+    transform: translate(-100%, 75%);
   }
-`;
- */
-export const Hamburger = styled.div`
-	display: none;
-	@media (max-width: 768px) {
-		display: block;
-		cursor: pointer;
-	}
-`;
-
+`
 export const Menu = styled.div`
-	display: flex;
-	@media (max-width: 768px) {
-		display: none;
-	}
-`;
-
-export const MenuItem = styled(Link)`
-	margin-left: 20px;
-	color: white;
-	text-decoration: none;
-`;
+  display: flex;
+  align-items: flex-start;
+  margin-right: -25px;
+  font-size: 1rem;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
+`

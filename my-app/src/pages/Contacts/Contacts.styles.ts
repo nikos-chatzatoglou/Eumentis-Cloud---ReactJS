@@ -16,6 +16,7 @@ export const StyledButton = styled(Button)`
     height: auto !important;
       @media only screen and (max-width: 480px) {
        font-size: 5px !important;
+       margin: auto;
     
   }
 
