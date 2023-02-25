@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Form, Input } from "antd";
+import { Form } from "antd";
 import {
 	HeartFilled,
 	HeartOutlined,
@@ -14,29 +14,28 @@ import "antd/dist/antd.css";
 import {
 	AvatarImg,
 	CardButton,
-	UserInfoWrapper,
-	UserDetailInfo,
-	UserInfoContainer,
+	ContactInfoWrapper,
+	ContactDetailInfo,
+	ContactInfoContainer,
 	ContactsCard,
 	StyledDivider,
 } from "./ContactsInfo.styles";
 import { contactType } from "../../pages/Contacts/Contacts";
 import EditContactForm from "../EditContactForm/EditContactForm";
-import { Container } from "../../pages/Home/Home.styles";
 
-type UserInfoProps = {
+type ContactInfoProps = {
 	updateContact: (id: number, values: any) => void;
 	handleDelete: (id: number) => void;
 	handleFavorite: (id: number, value: boolean) => void;
 	contact: contactType;
 };
 
-const UserInfo = ({
+const ContactInfo = ({
 	updateContact,
 	handleDelete,
 	handleFavorite,
 	contact,
-}: UserInfoProps) => {
+}: ContactInfoProps) => {
 	const [isEditContactFormVisible, setIsEditContactFormVisible] =
 		useState(false);
 	const [form] = Form.useForm();
@@ -100,31 +99,31 @@ const UserInfo = ({
 					</CardButton>,
 				]}
 			>
-				<UserInfoContainer>
-					<UserInfoWrapper>
+				<ContactInfoContainer>
+					<ContactInfoWrapper>
 						<MailOutlined />
-						<UserDetailInfo>{contact.email}</UserDetailInfo>
-					</UserInfoWrapper>
-					<UserInfoWrapper>
+						<ContactDetailInfo>{contact.email}</ContactDetailInfo>
+					</ContactInfoWrapper>
+					<ContactInfoWrapper>
 						<PhoneOutlined />
 						{contact.phone ? (
-							<UserDetailInfo>{contact.phone}</UserDetailInfo>
+							<ContactDetailInfo>{contact.phone}</ContactDetailInfo>
 						) : (
-							<UserDetailInfo>Not Available</UserDetailInfo>
+							<ContactDetailInfo>Not Available</ContactDetailInfo>
 						)}
-					</UserInfoWrapper>
-					<UserInfoWrapper>
+					</ContactInfoWrapper>
+					<ContactInfoWrapper>
 						<GlobalOutlined />
 						{contact.website ? (
-							<UserDetailInfo>{contact.website}</UserDetailInfo>
+							<ContactDetailInfo>{contact.website}</ContactDetailInfo>
 						) : (
-							<UserDetailInfo>Not Available</UserDetailInfo>
+							<ContactDetailInfo>Not Available</ContactDetailInfo>
 						)}
-					</UserInfoWrapper>
-				</UserInfoContainer>
+					</ContactInfoWrapper>
+				</ContactInfoContainer>
 			</ContactsCard>
 		</>
 	);
 };
 
-export default UserInfo;
+export default ContactInfo;

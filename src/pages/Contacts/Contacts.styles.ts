@@ -1,7 +1,6 @@
 import { Button } from "antd";
 import styled from "styled-components";
 import {FaInfoCircle} from "react-icons/fa";
-import {AiOutlineInfo} from "react-icons/ai"
 
 export const Container = styled.div`
 background: linear-gradient(180deg, #fff 0%, #B5B2AF 250%);
@@ -17,15 +16,11 @@ export const StyledButton = styled(Button)`
       @media only screen and (max-width: 480px) {
        font-size: 5px !important;
        margin: auto;
-    
   }
-
-
 `;
 
 export const Wrapper = styled.div`
     display:flex;
-    //justify-content:space-evenly;
     margin-top: 1%;
     margin-bottom: 1%;
     margin-left: 50px;
@@ -34,7 +29,6 @@ export const Wrapper = styled.div`
     @media only screen and (max-width: 480px) {
         font-size: 0.5rem;
         margin-left: auto;
-    
   }
     `;
 

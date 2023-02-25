@@ -2,16 +2,9 @@ import { Row } from "antd";
 import React, { useState, useEffect } from "react";
 import Loader from "../../components/Loader/Loader";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import UserInfo from "../../components/ContactsInfo/ContactsInfo";
+import ContactsInfo from "../../components/ContactsInfo/ContactsInfo";
 import { getContact } from "../../services/getContact";
-import {
-	StyledButton,
-	Wrapper,
-	Text,
-	Container,
-	SocialMsg,
-	Info,
-} from "./Contacts.styles";
+import { StyledButton, Wrapper, Container } from "./Contacts.styles";
 import AddNewContactForm from "../../components/AddNewContactForm/AddNewContactForm";
 
 export type contactType = {
@@ -134,13 +127,6 @@ const Contacts = () => {
 						>
 							Add Contact
 						</StyledButton>
-
-						{/* have to find a solution for responsive
-						<Info
-							onClick={() => {
-								console.log("show status message");
-							}}
-						></Info> */}
 					</Wrapper>
 
 					<AddNewContactForm
@@ -166,7 +152,7 @@ const Contacts = () => {
 								}
 							})
 							.map((contact: contactType) => (
-								<UserInfo
+								<ContactsInfo
 									key={contact.id}
 									contact={contact}
 									handleDelete={handleDelete}
